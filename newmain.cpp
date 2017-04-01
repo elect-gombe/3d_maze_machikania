@@ -199,14 +199,14 @@ int main_3d(void){
   // }
 
   projection=translation(vector3(32768,32768,0));
-  projection=loadPerspective(15000,65536*window_height/window_width,65536/2,65536*10,0,0)*projection;
+  projection=loadPerspective(15000,65536*window_height/window_width,65536/2,65536*12,0,0)*projection;
 
   vector3 viewdir;
   vector3 vlookat;
   vector2 mouse;
   vector2 np;  
   
-  vlookat = vector3(0,0,0);
+  vlookat = vector3(0,30000,0);
   obj = magnify_y(65536);
   obj = obj*magnify(1);
   while(1){
@@ -239,6 +239,11 @@ int main_3d(void){
       }
 
       //      if(v[0].z < 0) break;
+      if(!(
+ 	 ((v[0].x | 0xFFFF)&&(v[0].y |0xFFFF)&&(v[0].z|0xFFFF))||
+ 	 ((v[1].x | 0xFFFF)&&(v[1].y |0xFFFF)&&(v[1].z|0xFFFF))||
+ 	 ((v[2].x | 0xFFFF)&&(v[2].y |0xFFFF)&&(v[2].z|0xFFFF))))
+ 	continue;
 
       v[0].x=v[0].x*window_width/65536;v[0].y=v[0].y*window_height/65536;
       v[1].x=v[1].x*window_width/65536;v[1].y=v[1].y*window_height/65536;
@@ -249,11 +254,6 @@ int main_3d(void){
       // std::cout<<"v2 "<<v[2].x<<","<<v[2].y<<","<<v[2].z<<std::endl;
       //      std::cout<<v1.x
       //gc.setbrush();
-      if(!(
- 	 ((v[0].x | 0xFFFF)&&(v[0].y |0xFFFF)&&(v[0].z|0xFFFF))||
- 	 ((v[1].x | 0xFFFF)&&(v[1].y |0xFFFF)&&(v[1].z|0xFFFF))||
- 	 ((v[2].x | 0xFFFF)&&(v[2].y |0xFFFF)&&(v[2].z|0xFFFF))))
- 	continue;
 
       if(v[0].z &0x00FF0000)continue;
       if(v[1].z &0x00FF0000)continue;
@@ -265,24 +265,53 @@ int main_3d(void){
       }
       //int loadPower(const vector3 &light_pos,const vector3 &light_n,const vector3 obj[3]){
     }
-    
-    for(int y=0;y<window_height;y++){
-      int i=window_width-1;
-      do{
-	fpset(i,y,0);
- 	zlinebuf[i]=0x7FFFFFFF;
-      }while(--i);
-      for(int i=0;i<tnum;i++){
- 	if(t[i].ymin < y&&t[i].ymax >= y){
- 	  t[i].draw(zlinebuf,gc);
- 	}
+
+    int draworder[POLYNUM];
+    int zdata[POLYNUM];
+    for(int i=0;i<tnum;i++){
+      zdata[i] = t[i].p[1].z;
+      draworder[i] = i;
+    }
+
+    int tmpdata;
+    int tmpsubdata;
+    int j;
+
+    for (int i = 1; i < tnum; i++) {
+      tmpdata = zdata[i];
+      tmpsubdata = draworder[i];
+      if (zdata[i-1] > zdata[i]) {
+        j = i;
+        do {
+	  zdata[j] = zdata[j-1];
+	  draworder[j] = draworder[j-1];
+	  j--;
+        } while (j > 0 && zdata[j - 1] > tmpdata);
+        zdata[j] = tmpdata;
+	draworder[j] = tmpsubdata;
       }
     }
+    
+    for(int y=0;y<window_height;y++){
+      hline(0,window_width-1,y,0);
+      for(int i=0;i<window_width;i++){
+	zlinebuf[i]=65536*256;
+      }
+      for(int i=0;i<tnum;i++){
+	if(t[i].ymin < y&&t[i].ymax >= y){
+	  t[i].draw(zlinebuf,gc);
+	}
+      }
+    }
+
     vector3 vp;
-    vp = -viewdir;
-    vp.x = vp.x/5;
-    vp.y = vp.y/5;
-    vp.z = vp.z/5;
+    np.x -= 300;
+    np.y -= 200;
+    vp.x = -cos(np.x/1000.)*cos(np.y/1000.)*10000;
+    vp.y = 0;
+    vp.z = -sin(np.x/1000.)*cos(np.y/1000.)*10000;
+    np.x += 300;
+    np.y += 200;
     if(!(PORTB&(1<<10)))
       vlookat = vlookat + vp;
     if(!(PORTB&(1<<7)))

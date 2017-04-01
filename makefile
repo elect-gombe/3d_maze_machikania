@@ -33,7 +33,7 @@ COMPILE_FLAGS = -MMD -g -O3 -mprocessor=$(CPU) -c
 COMPILE_CFLAGS = $(COMPILE_FLAGS) -x c -Wall
 COMPILE_CPPFLAGS = $(COMPILE_FLAGS) -x c++ -Wall
 
-LD_FLAGS = -Os -mprocessor=$(CPU) -nostartfiles  -Wl,--defsym,_min_heap_size=512,-Map=$(BINDIR)/$(PROJECT).map,--gc-sections,--report-mem
+LD_FLAGS = -O3 -mprocessor=$(CPU) -nostartfiles  -Wl,--defsym,_min_heap_size=512,-Map=$(BINDIR)/$(PROJECT).map,--gc-sections,--report-mem
 LIBRARIES = $(wildcard $(COMPILER_PATH)/../lib/gcc/pic32mx/4.5.2/crt*.o)
 
 .PHONY: all clean size

@@ -10,8 +10,8 @@
 #define assert(x)
 
 extern int frame;
-const static int window_width = 256;
-const static int window_height = 220;
+const static int window_width = 200;
+const static int window_height = 140;
 
 extern const int window_width;
 extern const int window_height;

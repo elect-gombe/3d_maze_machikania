@@ -115,10 +115,13 @@ public:
     w  = int(int64_t(v.x)*m[3]/65536)+int(int64_t(m[7])*v.y/65536)+int(int64_t(v.z)*m[11]/65536)+m[15];
     if(w==0)w=1;
     // printf("wwwww%d\n",w);
+
+    int rw;
     
-    av.x=(int64_t)av.x*65536/w;
-    av.y=(int64_t)av.y*65536/w;
-    av.z=int64_t(av.z)*65536/w;
+    rw = 4294967295 / w;
+    av.x=(int64_t)av.x*rw/65536;
+    av.y=(int64_t)av.y*rw/65536;///w;
+    av.z=int64_t(av.z)*rw/65536;//w;
 
     return av;
   }

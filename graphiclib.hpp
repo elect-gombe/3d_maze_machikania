@@ -1,3 +1,6 @@
+#ifndef __GRAPHICLIB_H
+#define __GRAPHICLIB_H
+
 /*
  * graphic library using SDL2
  *
@@ -10,8 +13,8 @@
 #define assert(x)
 
 extern int frame;
-const static int window_width = 200;
-const static int window_height = 140;
+const static int window_width = 160;
+const static int window_height = 120;
 
 extern const int window_width;
 extern const int window_height;
@@ -135,3 +138,5 @@ inline void graphiclib::putdot(const vector2& v){
   assert(v.y >= 0&&v.y < height);
   fpset(v.x,v.y,strokecolor);
 }
+
+#endif

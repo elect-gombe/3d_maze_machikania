@@ -23,6 +23,7 @@ OBJ = 	$(addprefix $(OBJDIR)/, $(notdir $(C_SRC:.c=.o)))\
 	$(addprefix $(OBJDIR)/, $(notdir $(CPP_SRC:.cpp=.o)))\
 	$(addprefix $(OBJDIR)/, $(notdir $(ASM_SRC:.S=.o)))
 
+#LINKER_FILE = p32MX270F256B.ld
 LINKER_FILE = App-on-bootloader-170F.ld
 
 LINKER_SCRIPT = $(LIBSRCDIR)/$(LINKER_FILE)
@@ -35,6 +36,8 @@ COMPILE_CPPFLAGS = $(COMPILE_FLAGS) -x c++ -Wall
 
 LD_FLAGS = -O3 -mprocessor=$(CPU) -nostartfiles  -Wl,--defsym,_min_heap_size=512,-Map=$(BINDIR)/$(PROJECT).map,--gc-sections,--report-mem
 LIBRARIES = $(wildcard $(COMPILER_PATH)/../lib/gcc/pic32mx/4.5.2/crt*.o)
+
+debug: all
 
 .PHONY: all clean size
 

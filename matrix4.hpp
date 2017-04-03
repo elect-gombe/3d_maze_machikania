@@ -29,7 +29,7 @@ public:
   
   
   Matrix4& rotate_x(uint16_t angle){
-    /*とりあえず。。。*/
+    /*とりあえず。�?��??*/
     int sint,cost;
     sint = sin(((double)angle)*2*3.14159265359/65536)*65536;
     cost = cos(((double)angle)*2*3.14159265359/65536)*65536;
@@ -107,6 +107,7 @@ public:
 
   vector3 applyit(vector3 v){
     int w;
+    
     vector3 av;
     av.x = int(int64_t(v.x)*m[0]/65536)+int(int64_t(m[4])*v.y/65536)+int(int64_t(v.z)*m[8]/65536)+m[12];
     av.y = int(int64_t(v.x)*m[1]/65536)+int(int64_t(m[5])*v.y/65536)+int(int64_t(v.z)*m[9]/65536)+m[13];
@@ -114,6 +115,7 @@ public:
     w  = int(int64_t(v.x)*m[3]/65536)+int(int64_t(m[7])*v.y/65536)+int(int64_t(v.z)*m[11]/65536)+m[15];
     if(w==0)w=1;
     // printf("wwwww%d\n",w);
+    
     av.x=(int64_t)av.x*65536/w;
     av.y=(int64_t)av.y*65536/w;
     av.z=int64_t(av.z)*65536/w;

@@ -7,6 +7,7 @@
 #include "videoout.h"
 #include "vector2.h"
 #include "xprintf.h"
+#include "graphiclib.hpp"
 
 #include <stdint.h>
 #include <xc.h>
@@ -40,6 +41,11 @@ void init(){
 int main(void){
   init();
   main_3d();
+  for(int j=0;j<224;j++){
+    for(int i=0;i<256;i++){
+        pset(i,j,(volatile int)7);
+    }
+  }
   
   return 0;
 }
@@ -199,14 +205,14 @@ int main_3d(void){
   // }
 
   projection=translation(vector3(32768,32768,0));
-  projection=loadPerspective(15000,65536*window_height/window_width,65536/2,65536*12,0,0)*projection;
+  projection=loadPerspective(15000,65536*window_height/window_width,65536/2,65536*15,0,0)*projection;
 
   vector3 viewdir;
   vector3 vlookat;
   vector2 mouse;
   vector2 np;  
   
-  vlookat = vector3(0,30000,0);
+  vlookat = vector3(0,25000,0);
   obj = magnify_y(65536);
   obj = obj*magnify(1);
   while(1){
@@ -293,13 +299,17 @@ int main_3d(void){
     }
     
     for(int y=0;y<window_height;y++){
-      hline(0,window_width-1,y,0);
       for(int i=0;i<window_width;i++){
-	zlinebuf[i]=65536*256;
+	zlinebuf[i]=65536*250;
       }
       for(int i=0;i<tnum;i++){
-	if(t[i].ymin < y&&t[i].ymax >= y){
-	  t[i].draw(zlinebuf,gc);
+	if(t[draworder[i]].ymin < y&&t[draworder[i]].ymax >= y){
+	  t[draworder[i]].draw(zlinebuf,gc);
+	}
+      }
+      for(int i=0;i<window_width;i++){
+	if(zlinebuf[i]==65536*250){
+	  pset(i,y,0);
 	}
       }
     }

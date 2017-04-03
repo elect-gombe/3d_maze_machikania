@@ -87,6 +87,13 @@ public:
   void screenclear(void);
 };
 
+inline static
+void fpover(int x,int y,unsigned int c){
+  unsigned short *ad;
+  ad=VRAM+y*H_WORD+x/4;
+  c<<=(3-(x%4))*4;
+  *ad|=c;
+}
 
 inline static
 void fpset(int x,int y,unsigned int c){

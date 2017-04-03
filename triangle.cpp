@@ -52,9 +52,9 @@ int triangle::draw(int *zlinebuf,graphiclib &g){
       zv += deltaz;
       if(zv < zlinebuf[i]){
 	smoke = min(16777216-zv,16777216/4);
-	g.setbrush((col*smoke/65536/64+(c&1))/2);
-	g.putdot(i,yno+ymin);
-	zlinebuf[i] = zv+1000;
+	//g.setbrush();
+	fpover(i,yno+ymin,(col*smoke/65536/64+(c&1))/2);
+	zlinebuf[i] = zv;
       }
       c++;
     }

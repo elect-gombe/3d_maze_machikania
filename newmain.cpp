@@ -182,6 +182,8 @@ int main_3d(void){
   
   int zlinebuf[window_width];
   triangle t[POLYNUM];
+
+  int prevcount;
     
   //Matrix4 loadPerspective(int fovy, int aspect,int zNear, int zFar){
   // graphiclib gc(window_width,window_height);
@@ -213,7 +215,7 @@ int main_3d(void){
   vector2 np;  
   
   vlookat = vector3(0,25000,0);
-  obj = magnify_y(65536);
+  obj = magnify_y(65536*2/3);
   obj = obj*magnify(1);
   while(1){
     viewdir = vector3(cos(np.x/1000.)*cos(np.y/1000.)*65536,sin(np.y/1000.)*65536,sin(np.x/1000.)*cos(np.y/1000.)*65536);
@@ -246,9 +248,9 @@ int main_3d(void){
 
       //      if(v[0].z < 0) break;
       if(!(
- 	 ((v[0].x | 0xFFFF)&&(v[0].y |0xFFFF)&&(v[0].z|0xFFFF))||
- 	 ((v[1].x | 0xFFFF)&&(v[1].y |0xFFFF)&&(v[1].z|0xFFFF))||
- 	 ((v[2].x | 0xFFFF)&&(v[2].y |0xFFFF)&&(v[2].z|0xFFFF))))
+ 	 ((v[0].x & 0xFFFF)&&(v[0].y &0xFFFF)&&(v[0].z&0xFFFF))||
+ 	 ((v[1].x & 0xFFFF)&&(v[1].y &0xFFFF)&&(v[1].z&0xFFFF))||
+ 	 ((v[2].x & 0xFFFF)&&(v[2].y &0xFFFF)&&(v[2].z&0xFFFF))))
  	continue;
 
       v[0].x=v[0].x*window_width/65536;v[0].y=v[0].y*window_height/65536;
@@ -299,17 +301,15 @@ int main_3d(void){
     }
     
     for(int y=0;y<window_height;y++){
+      for(int i=0;i<window_width/4;i++){
+	VRAM[i+y*64] = 0;
+      }
       for(int i=0;i<window_width;i++){
 	zlinebuf[i]=65536*250;
       }
       for(int i=0;i<tnum;i++){
 	if(t[draworder[i]].ymin < y&&t[draworder[i]].ymax >= y){
 	  t[draworder[i]].draw(zlinebuf,gc);
-	}
-      }
-      for(int i=0;i<window_width;i++){
-	if(zlinebuf[i]==65536*250){
-	  pset(i,y,0);
 	}
       }
     }
@@ -338,6 +338,8 @@ int main_3d(void){
     // for(int i=0;i<3;i++){
     frame++;
     if(frame%20==0){
+      printnum2(0,200,15,0,1199/(drawcount-prevcount),2);
+      prevcount = drawcount;
     }
   }
 }

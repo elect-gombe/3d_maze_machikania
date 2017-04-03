@@ -118,10 +118,10 @@ public:
 
     int rw;
     
-    rw = 4294967295 / w;
+    rw = 4294967296 / w;
     av.x=(int64_t)av.x*rw/65536;
-    av.y=(int64_t)av.y*rw/65536;///w;
-    av.z=int64_t(av.z)*rw/65536;//w;
+    av.y=(int64_t)av.y*rw/65536;//65536;///w;
+    av.z=int64_t(av.z)*rw/65536;//65536;//w;
 
     return av;
   }

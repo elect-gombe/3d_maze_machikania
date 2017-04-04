@@ -2879,7 +2879,7 @@ LOAD /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../
  .debug_abbrev  0x000030b3       0x25 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_enable_interrupts_lib.o)
  .debug_abbrev  0x000030d8       0x25 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_tbl_lib.o)
 
-.debug_line     0x00000000     0x55b2
+.debug_line     0x00000000     0x559d
  *(.debug_line)
  .debug_line    0x00000000      0x434 obj/xprintf.o
  .debug_line    0x00000434      0xa37 obj/ff.o
@@ -2887,55 +2887,55 @@ LOAD /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../
  .debug_line    0x00001382      0x340 obj/triangle.o
  .debug_line    0x000016c2      0x2f5 obj/matrix4.o
  .debug_line    0x000019b7       0xf4 obj/vector2.o
- .debug_line    0x00001aab      0x841 obj/newmain.o
- .debug_line    0x000022ec       0xb6 obj/graphiclib.o
- .debug_line    0x000023a2       0xeb obj/vector3.o
- .debug_line    0x0000248d        0x0 obj/main.o
- .debug_line    0x0000248d      0x5b3 obj/graphicdraw.o
- .debug_line    0x00002a40      0xe27 obj/composite32-high4.o
- .debug_line    0x00003867       0x57 obj/crtn.o
- .debug_line    0x000038be       0x55 obj/crti.o
- .debug_line    0x00003913      0x118 obj/crt0.o
- .debug_line    0x00003a2b      0x17c /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(_divdi3.o)
- .debug_line    0x00003ba7       0xd2 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(addsf3.o)
- .debug_line    0x00003c79       0xbe /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(eqsf2.o)
- .debug_line    0x00003d37       0xba /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(gesf2.o)
- .debug_line    0x00003df1       0xd7 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(mulsf3.o)
- .debug_line    0x00003ec8       0xd2 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(subsf3.o)
- .debug_line    0x00003f9a       0xc6 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(fixsfsi.o)
- .debug_line    0x00004060       0xc7 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(floatsisf.o)
- .debug_line    0x00004127       0xc9 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(floatunsisf.o)
- .debug_line    0x000041f0       0xe9 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(adddf3.o)
- .debug_line    0x000042d9       0xd6 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(divdf3.o)
- .debug_line    0x000043af       0xb9 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(eqdf2.o)
- .debug_line    0x00004468       0xba /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(gedf2.o)
- .debug_line    0x00004522       0xd9 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(muldf3.o)
- .debug_line    0x000045fb       0xeb /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(subdf3.o)
- .debug_line    0x000046e6       0xc6 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(fixdfsi.o)
- .debug_line    0x000047ac       0xc6 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(floatsidf.o)
- .debug_line    0x00004872       0xc8 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(floatunsidf.o)
- .debug_line    0x0000493a       0xcb /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(extendsfdf2.o)
- .debug_line    0x00004a05       0xcd /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(truncdfsf2.o)
- .debug_line    0x00004ad2      0x16d /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(_udivdi3.o)
- .debug_line    0x00004c3f      0x16c /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(_umoddi3.o)
- .debug_line    0x00004dab       0xba /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(ledf2.o)
- .debug_line    0x00004e65       0xb9 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(osc_config_lib.o)
- .debug_line    0x00004f1e       0x73 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_disable_interrupts_lib.o)
- .debug_line    0x00004f91       0x73 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_restore_interrupts_lib.o)
- .debug_line    0x00005004       0x6e /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_enable_mv_int_lib.o)
- .debug_line    0x00005072       0x71 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(spi_getc_spi2_lib_legacy.o)
- .debug_line    0x000050e3       0x71 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(spi_open_spi2_lib_legacy.o)
- .debug_line    0x00005154        0x0 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(spi_brg_tbl_lib_legacy.o)
- .debug_line    0x00005154       0x71 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_clr_ev_flags_lib.o)
- .debug_line    0x000051c5       0x7b /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_open_lib.o)
- .debug_line    0x00005240       0x6b /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_enable_lib.o)
- .debug_line    0x000052ab       0x71 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_get_ev_flags_lib.o)
- .debug_line    0x0000531c       0x7e /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_write_event_control_flags_lib.o)
- .debug_line    0x0000539a       0x80 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_set_txfer_lib.o)
- .debug_line    0x0000541a       0xc2 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_start_txfer_lib.o)
- .debug_line    0x000054dc        0x0 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_reg_map_tbl_lib.o)
- .debug_line    0x000054dc       0x72 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_enable_interrupts_lib.o)
- .debug_line    0x0000554e       0x64 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_tbl_lib.o)
+ .debug_line    0x00001aab      0x82c obj/newmain.o
+ .debug_line    0x000022d7       0xb6 obj/graphiclib.o
+ .debug_line    0x0000238d       0xeb obj/vector3.o
+ .debug_line    0x00002478        0x0 obj/main.o
+ .debug_line    0x00002478      0x5b3 obj/graphicdraw.o
+ .debug_line    0x00002a2b      0xe27 obj/composite32-high4.o
+ .debug_line    0x00003852       0x57 obj/crtn.o
+ .debug_line    0x000038a9       0x55 obj/crti.o
+ .debug_line    0x000038fe      0x118 obj/crt0.o
+ .debug_line    0x00003a16      0x17c /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(_divdi3.o)
+ .debug_line    0x00003b92       0xd2 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(addsf3.o)
+ .debug_line    0x00003c64       0xbe /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(eqsf2.o)
+ .debug_line    0x00003d22       0xba /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(gesf2.o)
+ .debug_line    0x00003ddc       0xd7 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(mulsf3.o)
+ .debug_line    0x00003eb3       0xd2 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(subsf3.o)
+ .debug_line    0x00003f85       0xc6 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(fixsfsi.o)
+ .debug_line    0x0000404b       0xc7 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(floatsisf.o)
+ .debug_line    0x00004112       0xc9 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(floatunsisf.o)
+ .debug_line    0x000041db       0xe9 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(adddf3.o)
+ .debug_line    0x000042c4       0xd6 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(divdf3.o)
+ .debug_line    0x0000439a       0xb9 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(eqdf2.o)
+ .debug_line    0x00004453       0xba /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(gedf2.o)
+ .debug_line    0x0000450d       0xd9 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(muldf3.o)
+ .debug_line    0x000045e6       0xeb /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(subdf3.o)
+ .debug_line    0x000046d1       0xc6 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(fixdfsi.o)
+ .debug_line    0x00004797       0xc6 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(floatsidf.o)
+ .debug_line    0x0000485d       0xc8 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(floatunsidf.o)
+ .debug_line    0x00004925       0xcb /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(extendsfdf2.o)
+ .debug_line    0x000049f0       0xcd /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(truncdfsf2.o)
+ .debug_line    0x00004abd      0x16d /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(_udivdi3.o)
+ .debug_line    0x00004c2a      0x16c /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(_umoddi3.o)
+ .debug_line    0x00004d96       0xba /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/libgcc.a(ledf2.o)
+ .debug_line    0x00004e50       0xb9 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(osc_config_lib.o)
+ .debug_line    0x00004f09       0x73 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_disable_interrupts_lib.o)
+ .debug_line    0x00004f7c       0x73 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_restore_interrupts_lib.o)
+ .debug_line    0x00004fef       0x6e /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_enable_mv_int_lib.o)
+ .debug_line    0x0000505d       0x71 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(spi_getc_spi2_lib_legacy.o)
+ .debug_line    0x000050ce       0x71 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(spi_open_spi2_lib_legacy.o)
+ .debug_line    0x0000513f        0x0 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(spi_brg_tbl_lib_legacy.o)
+ .debug_line    0x0000513f       0x71 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_clr_ev_flags_lib.o)
+ .debug_line    0x000051b0       0x7b /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_open_lib.o)
+ .debug_line    0x0000522b       0x6b /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_enable_lib.o)
+ .debug_line    0x00005296       0x71 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_get_ev_flags_lib.o)
+ .debug_line    0x00005307       0x7e /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_write_event_control_flags_lib.o)
+ .debug_line    0x00005385       0x80 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_set_txfer_lib.o)
+ .debug_line    0x00005405       0xc2 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_chn_start_txfer_lib.o)
+ .debug_line    0x000054c7        0x0 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(dma_reg_map_tbl_lib.o)
+ .debug_line    0x000054c7       0x72 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_enable_interrupts_lib.o)
+ .debug_line    0x00005539       0x64 /home/gombe/workspace/machikania/origdev/pic32/compiler/pic32-tools/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/libmchp_peripheral_32MX250F128B.a(int_tbl_lib.o)
 
 .debug_frame    0x00000000     0x11b4
  *(.debug_frame)

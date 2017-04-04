@@ -214,8 +214,8 @@ int main_3d(void){
   vector2 mouse;
   vector2 np;  
   
-  vlookat = vector3(0,25000,0);
-  obj = magnify_y(65536*2/3);
+  vlookat = vector3(0,35000,0);
+  obj = magnify_y(65536);
   obj = obj*magnify(1);
   while(1){
     viewdir = vector3(cos(np.x/1000.)*cos(np.y/1000.)*65536,sin(np.y/1000.)*65536,sin(np.x/1000.)*cos(np.y/1000.)*65536);

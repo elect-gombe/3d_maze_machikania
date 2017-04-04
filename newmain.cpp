@@ -183,7 +183,7 @@ int main_3d(void){
   int zlinebuf[window_width];
   triangle t[POLYNUM];
 
-  int prevcount;
+  int prevcount=0;
     
   //Matrix4 loadPerspective(int fovy, int aspect,int zNear, int zFar){
   // graphiclib gc(window_width,window_height);
@@ -248,10 +248,10 @@ int main_3d(void){
 
       //      if(v[0].z < 0) break;
       if(!(
- 	 ((v[0].x & 0xFFFF)&&(v[0].y &0xFFFF)&&(v[0].z&0xFFFF))||
- 	 ((v[1].x & 0xFFFF)&&(v[1].y &0xFFFF)&&(v[1].z&0xFFFF))||
- 	 ((v[2].x & 0xFFFF)&&(v[2].y &0xFFFF)&&(v[2].z&0xFFFF))))
- 	continue;
+	   !((v[0].x|v[0].y|v[0].z)&0xFFFF0000)||
+	   !((v[1].x|v[1].y|v[1].z)&0xFFFF0000)||
+	   !((v[2].x|v[2].y|v[2].z)&0xFFFF0000)
+	   ))continue;
 
       v[0].x=v[0].x*window_width/65536;v[0].y=v[0].y*window_height/65536;
       v[1].x=v[1].x*window_width/65536;v[1].y=v[1].y*window_height/65536;
@@ -277,13 +277,14 @@ int main_3d(void){
     int draworder[POLYNUM];
     int zdata[POLYNUM];
     for(int i=0;i<tnum;i++){
-      zdata[i] = t[i].p[1].z;
+      zdata[i] = t[i].p[1].z+t[i].p[2].z+t[i].p[0].z;
       draworder[i] = i;
     }
 
     int tmpdata;
     int tmpsubdata;
     int j;
+    int waitingtime;
 
     for (int i = 1; i < tnum; i++) {
       tmpdata = zdata[i];
@@ -301,15 +302,17 @@ int main_3d(void){
     }
     
     for(int y=0;y<window_height;y++){
-      for(int i=0;i<window_width/4;i++){
-	VRAM[i+y*64] = 0;
-      }
       for(int i=0;i<window_width;i++){
 	zlinebuf[i]=65536*250;
       }
       for(int i=0;i<tnum;i++){
 	if(t[draworder[i]].ymin < y&&t[draworder[i]].ymax >= y){
 	  t[draworder[i]].draw(zlinebuf,gc);
+	}
+      }
+      for(int i=0;i<window_width;i++){
+	if(zlinebuf[i]==65536*250){
+	  fpset(i,y,0);
 	}
       }
     }
@@ -338,7 +341,12 @@ int main_3d(void){
     // for(int i=0;i<3;i++){
     frame++;
     if(frame%20==0){
-      printnum2(0,200,15,0,1199/(drawcount-prevcount),2);
+      printnum2(0,200,15,0,1199/(drawcount-prevcount),3);
+      printstr(8*3,200,15,0,(unsigned char*)"fps");
+      printnum2(60,200,15,0,tnum,3);
+      printstr(60+8*3,200,15,0,(unsigned char*)"poly");
+      printnum2(120,200,15,0,(VRAMp-VRAM)/64,3);
+      printstr(120+8*3,200,15,0,(unsigned char*)"line");
       prevcount = drawcount;
     }
   }

@@ -46,7 +46,6 @@ int triangle::draw(int *zlinebuf,graphiclib &g){
 
   {
     int c=sx+yno+ymin+frame;
-    int csm;
     unsigned short g=0;
     unsigned short *gr;
     int i;

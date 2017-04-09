@@ -8,17 +8,17 @@
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: build and debug
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-image: /home/gombe/workspace/machikania/origdev/example/maze/bin/EXAMPLE1.elf nbproject/Makefile-default.mk 
+image: /home/gombe/workspace/machikania/origdev/example/maze_withgene/bin/EXAMPLE1.elf nbproject/Makefile-default.mk 
 else
-image: /home/gombe/workspace/machikania/origdev/example/maze/bin/EXAMPLE1.hex nbproject/Makefile-default.mk 
+image: /home/gombe/workspace/machikania/origdev/example/maze_withgene/bin/EXAMPLE1.hex nbproject/Makefile-default.mk 
 endif
 
-.PHONY: /home/gombe/workspace/machikania/origdev/example/maze/bin/EXAMPLE1.elf
-/home/gombe/workspace/machikania/origdev/example/maze/bin/EXAMPLE1.elf: 
+.PHONY: /home/gombe/workspace/machikania/origdev/example/maze_withgene/bin/EXAMPLE1.elf
+/home/gombe/workspace/machikania/origdev/example/maze_withgene/bin/EXAMPLE1.elf: 
 	cd . && cd ../&&make debug -j
 
-.PHONY: /home/gombe/workspace/machikania/origdev/example/maze/bin/EXAMPLE1.hex
-/home/gombe/workspace/machikania/origdev/example/maze/bin/EXAMPLE1.hex: 
+.PHONY: /home/gombe/workspace/machikania/origdev/example/maze_withgene/bin/EXAMPLE1.hex
+/home/gombe/workspace/machikania/origdev/example/maze_withgene/bin/EXAMPLE1.hex: 
 	cd . && cd ../&&make -j
 
 

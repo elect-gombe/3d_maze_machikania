@@ -1,6 +1,5 @@
 #ifndef __GRAPHICLIB_H
 #define __GRAPHICLIB_H
-
 /*
  * graphic library using SDL2
  *
@@ -10,8 +9,9 @@
 #include "vector2.hpp"
 #include "vector3.hpp"
 #include "videoout.h"
+#ifndef assert
 #define assert(x)
-
+#endif
 extern int frame;
 const static int window_width = 160;
 const static int window_height = 120;
@@ -72,6 +72,7 @@ public:
   void Line(const vector3 &vin1,const vector3 &vin2);
   inline void putdot(const vector2& v);
   inline void putdot(int x,int y);
+  inline void putdot();
   inline void putsubdot(const vector2& v);
   inline void putsubdot(int x,int y);
   void circle(const vector2& vin,int r);
@@ -141,6 +142,12 @@ inline void graphiclib::putdot(int x,int y){
 }
 
 inline void graphiclib::putdot(const vector2& v){
+  assert(v.x >= 0&&v.x < width);
+  assert(v.y >= 0&&v.y < height);
+  fpset(v.x,v.y,strokecolor);
+}
+inline void graphiclib::putdot(){
+  const vector2& v = pv;
   assert(v.x >= 0&&v.x < width);
   assert(v.y >= 0&&v.y < height);
   fpset(v.x,v.y,strokecolor);

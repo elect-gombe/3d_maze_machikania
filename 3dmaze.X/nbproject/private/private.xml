@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/gombe/workspace/machikania/origdev/example/maze/triangle.cpp</file>
-            <file>file:/home/gombe/workspace/machikania/origdev/example/maze/matrix4.hpp</file>
-            <file>file:/home/gombe/workspace/machikania/origdev/library/composite32-high4.cpp</file>
-            <file>file:/home/gombe/workspace/machikania/origdev/library/crt0.S</file>
-            <file>file:/home/gombe/workspace/machikania/origdev/example/maze/newmain.cpp</file>
-            <file>file:/home/gombe/workspace/machikania/origdev/example/maze/graphiclib.hpp</file>
+            <file>file:/home/gombe/workspace/machikania/origdev/example/maze_withgene/newmain.cpp</file>
+            <file>file:/home/gombe/workspace/machikania/origdev/example/maze_withgene/maze.cpp</file>
         </group>
     </open-files>
 </project-private>

@@ -57,8 +57,8 @@ int main(void){
 #include "graphiclib.hpp"
 #include "triangle.hpp"
 
-#define POLYMAXNUM 400
-#define POINTMAXNUM 800
+#define POLYMAXNUM 300
+#define POINTMAXNUM 600
 
 vector3_t pointvec[POINTMAXNUM]={
 // {-1376256,-32768,-1179648},{-1376256,32768,-1179648},
@@ -357,8 +357,6 @@ int polyvec[POLYMAXNUM][3]={
   // {4,5,7},
   // {4,6,7},
 };
-
-static vector3 pv[12][3];
 static
 int loadPower(const vector3 &light_pos,const vector3 &light_n,const vector3 obj[3]){
   vector3 light_obj;
@@ -382,9 +380,8 @@ int loadPower(const vector3 &light_pos,const vector3 &light_n,const vector3 obj[
 
 map map;
 
-
 // *draw poly* num max
-#define ONSCREENNUM 100
+#define ONSCREENNUM 50
 
 int main_3d(void){
   graphiclib gc;
@@ -422,9 +419,7 @@ int main_3d(void){
   int polynum;
   int pointnum;
 
-  map.mazemake(0,vector2(17,17),gc);
-  pointnum=map.genepoints(pointvec);
-  polynum=map.genepoly(polyvec);
+  map.mazemake(0,vector2(39,39),gc);
 
   projection=translation(vector3(32768,32768,0));
   projection=loadPerspective(15000,65536*window_height/window_width,65536/2,65536*30,0,0)*projection;
@@ -436,6 +431,8 @@ int main_3d(void){
   
   vlookat = vector3(0,35000,0);
   while(1){
+    pointnum=map.genepoints(pointvec,vlookat);
+    polynum=map.genepoly(polyvec,vlookat);
     viewdir = vector3(cos(np.x/1000.)*cos(np.y/1000.)*65536,sin(np.y/1000.)*65536,sin(np.x/1000.)*cos(np.y/1000.)*65536);
     m=projection*lookat(vlookat-viewdir,vlookat+viewdir);
 

@@ -1,8 +1,8 @@
 #ifndef __MAZE_H
 #define __MAZE_H
 
-#define MAX_X 25
-#define MAX_Y 25
+#define MAX_X 39
+#define MAX_Y 39
 
 #define CANDIDI_MAX (((MAX_X-1))*((MAX_Y-1))/4)
 
@@ -31,8 +31,8 @@ private:
   void initmap();
 public:
   int map[MAX_Y][MAX_X];
-  int genepoly(int polyvec[][3]);
-  int genepoints(vector3_t *pv);
+  int genepoly(int polyvec[][3],const vector3& lookat);
+  int genepoints(vector3_t *pv,const vector3& lookat);
 
   void printmap(graphiclib& g);
   void printmap_s();

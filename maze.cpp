@@ -190,43 +190,105 @@ void map::mazemake(int seed,const vector2& sm,graphiclib& g){
     if(start.x==0)break;
     dig(start,g);
     printmap(g);
-    wait60thsec(2);
   }
   wait60thsec(120);
   //  printmap_s(size,map);
 }
 
 
-int map::genepoints(vector3_t *pv){
+const int drawarea=8;
+int map::genepoints(vector3_t *pv,const vector3& lookat){
   int i=0;
-  for(int x=0;x<size.x+1;x++){
-    for(int y=0;y<size.y+1;y++){
-      pv[i].x=(x-(size.x+1)/2)*131072;pv[i].y=-21845;pv[i++].z=(y-size.y/2)*131072;
-      pv[i].x=(x-(size.x+1)/2)*131072;pv[i].y=21845;pv[i++].z=(y-size.y/2)*131072;
+  vector2 s;
+
+  s.x = lookat.z/65536/2+size.x/2-drawarea;
+  s.y = lookat.x/65536/2+size.y/2-drawarea;
+  //s.print();
+  //puts("");
+
+  for(int x=0;x<drawarea*2;x++){
+    for(int y=0;y<drawarea*2;y++){
+      pv[i].x   =  (x-(size.x+1)/2+s.y)*131072;
+      pv[i].y   = -21845;
+      pv[i++].z =  (y-size.y/2+s.x)*131072;
+      //printf("%d,%d,%d\n",pv[i].x,pv[i].y,pv[i].z);
+      pv[i].x   =  (x-(size.x+1)/2+s.y)*131072;
+      pv[i].y   =  21845;
+      pv[i++].z =  (y-size.y/2+s.x)*131072;
     }
   }
+
   return i;
 }
 
-int map::genepoly(int polyvec[][3]){
+int map::genepoly(int polyvec[][3],const vector3& lookat){
   vector2 v;
+  vector2 vv;
   vector2 vd;
   int i=0;
 
-  for(v.x=0;v.x<size.x;v.x++){
-    for(v.y=0;v.y<size.y;v.y++){
-      if(*loadmap(v)!=WALL)continue;
+  vector2 s;
+
+  s.x = lookat.z/65536/2+size.x/2-drawarea;
+  s.y = lookat.x/65536/2+size.y/2-drawarea;
+
+  for(vv.x=0;vv.x<drawarea*2-1;vv.x++){
+    for(vv.y=0;vv.y<drawarea*2-1;vv.y++){
+      v = vv + s;
+      if(!isinmap(v)||*loadmap(v)!=WALL)continue;
       vd = v + vector2(1,0);
       if(isinmap(vd)&&*loadmap(vd)==WALL){
-	polyvec[i][0]=(v.x+v.y*(size.x+1))*2+0;polyvec[i][1]=(v.x+v.y*(size.x+1))*2+1;polyvec[i++][2]=(v.x+v.y*(size.x+1))*2+2;
-	polyvec[i][0]=(v.x+v.y*(size.x+1))*2+1;polyvec[i][1]=(v.x+v.y*(size.x+1))*2+3;polyvec[i++][2]=(v.x+v.y*(size.x+1))*2+2;
+	polyvec[i][0]=(vv.x+vv.y*(drawarea*2))*2+0;
+	polyvec[i][1]=(vv.x+vv.y*(drawarea*2))*2+1;
+	polyvec[i++][2]=(vv.x+vv.y*(drawarea*2))*2+2;
+	polyvec[i][0]=(vv.x+vv.y*(drawarea*2))*2+1;
+	polyvec[i][1]=(vv.x+vv.y*(drawarea*2))*2+3;
+	polyvec[i++][2]=(vv.x+vv.y*(drawarea*2))*2+2;
       }
       vd = v + vector2(0,1);
       if(isinmap(vd)&&*loadmap(vd)==WALL){
-	polyvec[i][0]=(v.x+v.y*(size.x+1))*2+0;polyvec[i][1]=(v.x+v.y*(size.x+1))*2+1;polyvec[i++][2]=(v.x+(v.y+1)*(size.x+1))*2;
-	polyvec[i][0]=(v.x+(v.y+1)*(size.x+1))*2+1;polyvec[i][1]=(v.x+v.y*(size.x+1))*2+1;polyvec[i++][2]=(v.x+(v.y+1)*(size.x+1))*2;
+	polyvec[i][0]=(vv.x+vv.y*(drawarea*2))*2+0;
+	polyvec[i][1]=(vv.x+vv.y*(drawarea*2))*2+1;
+	polyvec[i++][2]=(vv.x+(vv.y+1)*(drawarea*2))*2;
+	polyvec[i][0]=(vv.x+(vv.y+1)*(drawarea*2))*2+1;
+	polyvec[i][1]=(vv.x+vv.y*(drawarea*2))*2+1;
+	polyvec[i++][2]=(vv.x+(vv.y+1)*(drawarea*2))*2;
       }
     }
   }
   return i;
 }
+
+// int map::genepoints(vector3_t *pv){
+//   int i=0;
+//   for(int x=0;x<size.x+1;x++){
+//     for(int y=0;y<size.y+1;y++){
+//       pv[i].x=(x-(size.x+1)/2)*131072;pv[i].y=-21845;pv[i++].z=(y-size.y/2)*131072;
+//       pv[i].x=(x-(size.x+1)/2)*131072;pv[i].y=21845;pv[i++].z=(y-size.y/2)*131072;
+//     }
+//   }
+//   return i;
+// }
+
+// int map::genepoly(int polyvec[][3]){
+//   vector2 v;
+//   vector2 vd;
+//   int i=0;
+
+//   for(v.x=0;v.x<size.x;v.x++){
+//     for(v.y=0;v.y<size.y;v.y++){
+//       if(*loadmap(v)!=WALL)continue;
+//       vd = v + vector2(1,0);
+//       if(isinmap(vd)&&*loadmap(vd)==WALL){
+// 	polyvec[i][0]=(v.x+v.y*(size.x+1))*2+0;polyvec[i][1]=(v.x+v.y*(size.x+1))*2+1;polyvec[i++][2]=(v.x+v.y*(size.x+1))*2+2;
+// 	polyvec[i][0]=(v.x+v.y*(size.x+1))*2+1;polyvec[i][1]=(v.x+v.y*(size.x+1))*2+3;polyvec[i++][2]=(v.x+v.y*(size.x+1))*2+2;
+//       }
+//       vd = v + vector2(0,1);
+//       if(isinmap(vd)&&*loadmap(vd)==WALL){
+// 	polyvec[i][0]=(v.x+v.y*(size.x+1))*2+0;polyvec[i][1]=(v.x+v.y*(size.x+1))*2+1;polyvec[i++][2]=(v.x+(v.y+1)*(size.x+1))*2;
+// 	polyvec[i][0]=(v.x+(v.y+1)*(size.x+1))*2+1;polyvec[i][1]=(v.x+v.y*(size.x+1))*2+1;polyvec[i++][2]=(v.x+(v.y+1)*(size.x+1))*2;
+//       }
+//     }
+//   }
+//   return i;
+// }

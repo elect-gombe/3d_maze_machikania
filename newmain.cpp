@@ -237,7 +237,7 @@ int main_3d(void){
 	zlinebuf[i]=65536*250;
       }
       for(int i=0;i<tnum;i++){
-	if(t[draworder[i]].ymin < y&&t[draworder[i]].ymax >= y){
+	if(t[draworder[i]].ymin <= y&&t[draworder[i]].ymax > y){
 	  t[draworder[i]].draw(zlinebuf,gc);
 	}
       }

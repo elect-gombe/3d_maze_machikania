@@ -105,10 +105,10 @@ public:
     return *this;
   }
 
-  vector3 applyit(vector3 v){
+  vector3_t applyit(vector3 v){
     int w;
     
-    vector3 av;
+    vector3_t av;
     av.x = int(int64_t(v.x)*m[0]/65536)+int(int64_t(m[4])*v.y/65536)+int(int64_t(v.z)*m[8]/65536)+m[12];
     av.y = int(int64_t(v.x)*m[1]/65536)+int(int64_t(m[5])*v.y/65536)+int(int64_t(v.z)*m[9]/65536)+m[13];
     av.z = int(int64_t(v.x)*m[2]/65536)+int(int64_t(m[6])*v.y/65536)+int(int64_t(v.z)*m[10]/65536)+m[14];

@@ -1,5 +1,6 @@
 #include "vector2.hpp"
 #include <stdio.h>
+
 vector2::vector2(){
   x=0;
   y=0;

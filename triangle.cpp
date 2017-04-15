@@ -46,7 +46,6 @@ int triangle::draw(int *zlinebuf,graphiclib &g){
 
   {
     int c=sx+yno+ymin+frame;
-    unsigned short g=0;
     unsigned short *gr;
     int i;
     gr = VRAM+(yno+ymin)*64+sx/4;
@@ -59,49 +58,6 @@ int triangle::draw(int *zlinebuf,graphiclib &g){
 	zlinebuf[i] = zv;
       }
       c++;
-    }
-    
-    for(;i<ex;i++){
-      ;//plot
-      //      printf("%6.1f ",zv/65536.);
-      zv += deltaz;
-      g=0;
-      smoke = min(16777216-zv,16777216/4);
-      if(zv < zlinebuf[i]){
-	//g.setbrush();
-	g=((col*smoke/65536/64+(c&1))/2)<<12;
-	zlinebuf[i] = zv;
-      }
-      c++;
-      i++;
-      if(i>=ex)break;
-      zv += deltaz;
-      if(zv < zlinebuf[i]){
-	//g.setbrush();
-	g|=((col*smoke/65536/64+(c&1))/2)<<8;
-	fpover(i,yno+ymin,(col*smoke/65536/64+(c&1))/2);
-	zlinebuf[i] = zv;
-      }
-      c++;
-      i++;
-      if(i>=ex)break;
-      zv += deltaz;
-      if(zv < zlinebuf[i]){
-	//g.setbrush();
-	g|=((col*smoke/65536/64+(c&1))/2)<<4;
-	zlinebuf[i] = zv;
-      }
-      c++;
-      i++;
-      if(i>=ex)break;
-      zv += deltaz;
-      if(zv < zlinebuf[i]){
-	//g.setbrush();
-	g|=(col*smoke/65536/64+(c&1))/2;
-	zlinebuf[i] = zv;
-      }
-      c++;
-      *gr++|=g;
     }
     //    puts("");
   }

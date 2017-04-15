@@ -1,3 +1,5 @@
+#include "xc.h"
+#include "videoout.h"
 #include <stdio.h>
 #include "vector2.hpp"
 #include <assert.h>
@@ -6,6 +8,8 @@
 #include "maze.hpp"
 #include "vector3.hpp"
 #include "graphiclib.hpp"
+
+using namespace video;
 
 const vector2_t cdir[4] = {
   {0,1},
@@ -20,14 +24,6 @@ const vector2_t cdoubledir[4] = {
   {0,-2},
   {-2,0},
 };
-
-static
-void wait60thsec(int s60){
-  for(int i=0;i<s60;i++){
-    while(drawing);
-    while(!drawing);
-  }
-}
 
 inline
 vector2 operator+(const vector2& v1,const vector2_t& v2){
@@ -67,7 +63,6 @@ enum mape{
   WALL=0x1,
 };
 
-
 void map::printmap(graphiclib& g){
   vector2 p;
   vector2 sp;
@@ -79,31 +74,85 @@ void map::printmap(graphiclib& g){
       for(p.x=0;p.x<size.x;p.x++){
 	for(sp.x=-1;sp.x <= 1;sp.x++){
 	  t = p+sp;
+	  dp = p+p+p+sp;
 	  if(*loadmap(p)==WAY||sp.x*sp.x+sp.y*sp.y==2){
-	    video::pset(dp.x,dp.y,15);
+	    video::pset(dp.x+10,dp.y+10,15);
 	  }
 	  else if(isinmap(t)&&*loadmap(t)==WALL){
-	    video::pset(dp.x,dp.y,0);
+	    video::pset(dp.x+10,dp.y+10,0);
 	  }else{
-	    video::pset(dp.x,dp.y,15);
+	    video::pset(dp.x+10,dp.y+10,15);
 	  }
-	  dp.x++;
 	}
       }
-      dp.y++;
-      dp.x=0;
     }
   }
 }
+
+void map::printmap(graphiclib& g,const vector2& pd){
+  vector2 p;
+  vector2 sp;
+  vector2 t;
+  vector2 dp;
+  
+  for(p.y=max(0,pd.y-2);p.y<min(size.y,pd.y+2);p.y++){
+    for(sp.y=-1;sp.y <= 1;sp.y++){
+      for(p.x=max(0,pd.x-2);p.x<min(size.x,pd.x+2);p.x++){
+	for(sp.x=-1;sp.x <= 1;sp.x++){
+	  t = p+sp;
+	  dp = p+p+p+sp;
+	  if(*loadmap(p)==WAY||sp.x*sp.x+sp.y*sp.y==2){
+	    video::pset(dp.x+10,dp.y+10,15);
+	  }
+	  else if(isinmap(t)&&*loadmap(t)==WALL){
+	    video::pset(dp.x+10,dp.y+10,0);
+	  }else{
+	    video::pset(dp.x+10,dp.y+10,15);
+	  }
+	}
+      }
+    }
+  }
+}
+
+void map::printmap(graphiclib& g,const vector2& pd,int r){
+  vector2 p;
+  vector2 sp;
+  vector2 t;
+  vector2 dp;
+  
+  for(p.y=max(0,pd.y-r);p.y<min(size.y,pd.y+r);p.y++){
+    for(sp.y=-1;sp.y <= 1;sp.y++){
+      for(p.x=max(0,pd.x-r);p.x<min(size.x,pd.x+r);p.x++){
+	for(sp.x=-1;sp.x <= 1;sp.x++){
+	  t = p+sp;
+	  dp = p+p+p+sp;
+	  if(*loadmap(p)==WAY||sp.x*sp.x+sp.y*sp.y==2){
+	    video::pset(dp.x+10,dp.y+10,15);
+	  }
+	  else if(isinmap(t)&&*loadmap(t)==WALL){
+	    video::pset(dp.x+10,dp.y+10,0);
+	  }else{
+	    video::pset(dp.x+10,dp.y+10,15);
+	  }
+	}
+      }
+    }
+  }
+}
+
+static
+int nwait,disp=1;
 
 void map::dig(vector2& p,graphiclib& g){
   vector2 desti;
   int c;
   int r;
-  int *pm;
+  uint8_t *pm;
 
   c = 0;
   r = myRand();
+  nwait = 4;
   while(c < 4){
     desti = p+cdoubledir[(c+r)&0x3];
     if(isinmap(desti)&&*(pm=loadmap(desti))==WALL){
@@ -112,7 +161,12 @@ void map::dig(vector2& p,graphiclib& g){
       c=0;
       r=myRand();
       p = desti;
-      printmap(g);
+      keytask();
+      if(disp){
+	printmap(g,p+cdir[(c+r)&0x3],3);
+	nwait = 0;
+	wait60thsec(2);
+      }
     }else{
       c++;
     }
@@ -178,6 +232,8 @@ vector2_t candidi[CANDIDI_MAX];
 void map::mazemake(int seed,const vector2& sm,graphiclib& g){
   vector2 start=vector2(1,1);
 
+  printstr(0,200,15,0,(unsigned char*)"press Up to skip");
+
   size = sm;
 
   myRand(seed);
@@ -189,32 +245,42 @@ void map::mazemake(int seed,const vector2& sm,graphiclib& g){
     start = calcstart(candidi);
     if(start.x==0)break;
     dig(start,g);
-    printmap(g);
+    if(disp)
+      wait60thsec(1);
+    //    printmap(g);
   }
-  wait60thsec(120);
+  printstr(0,200,15,0,(unsigned char*)"done! press start key");
+  printmap(g);
+  while(!ISPRESSED(KEYSTART));wait60thsec(1);
   //  printmap_s(size,map);
 }
 
+vector2 map::calcpos(const vector3& lookat,int n){
+  vector2 pos;
+
+  pos.x = +lookat.z*n/size_grid+size.x*n/2;
+  pos.y = lookat.x*n/size_grid+size.y*n/2;
+
+  return pos;
+}
 
 const int drawarea=8;
 int map::genepoints(vector3_t *pv,const vector3& lookat){
   int i=0;
   vector2 s;
 
-  s.x = lookat.z/65536/2+size.x/2-drawarea;
-  s.y = lookat.x/65536/2+size.y/2-drawarea;
-  //s.print();
-  //puts("");
-
+  s = calcpos(lookat,1);
+  s.x -= drawarea;
+  s.y -= drawarea;
   for(int x=0;x<drawarea*2;x++){
     for(int y=0;y<drawarea*2;y++){
-      pv[i].x   =  (x-(size.x+1)/2+s.y)*131072;
-      pv[i].y   = -21845;
-      pv[i++].z =  (y-size.y/2+s.x)*131072;
+      pv[i].x   =  (x-(size.x+1)/2+s.y)*size_grid;
+      pv[i].y   = -size_height/2;
+      pv[i++].z =  (y-size.y/2+s.x)*size_grid;
       //printf("%d,%d,%d\n",pv[i].x,pv[i].y,pv[i].z);
-      pv[i].x   =  (x-(size.x+1)/2+s.y)*131072;
-      pv[i].y   =  21845;
-      pv[i++].z =  (y-size.y/2+s.x)*131072;
+      pv[i].x   =  (x-(size.x+1)/2+s.y)*size_grid;
+      pv[i].y   =  size_height/2;
+      pv[i++].z =  (y-size.y/2+s.x)*size_grid;
     }
   }
 
@@ -229,8 +295,9 @@ int map::genepoly(int polyvec[][3],const vector3& lookat){
 
   vector2 s;
 
-  s.x = lookat.z/65536/2+size.x/2-drawarea;
-  s.y = lookat.x/65536/2+size.y/2-drawarea;
+  s = calcpos(lookat,1);
+  s.x -= drawarea;
+  s.y -= drawarea;
 
   for(vv.x=0;vv.x<drawarea*2-1;vv.x++){
     for(vv.y=0;vv.y<drawarea*2-1;vv.y++){
@@ -257,6 +324,19 @@ int map::genepoly(int polyvec[][3],const vector3& lookat){
     }
   }
   return i;
+}
+
+void map::keytask(){
+  int key = KEYPORT;
+  if(key){
+    if(disp&&ISPRESSED(KEYUP)){
+      printstr(0,200,15,0,(unsigned char*)"skipping...     ");
+      disp = 0;
+    }else if(!disp&&ISPRESSED(KEYDOWN)){
+      printstr(0,200,15,0,(unsigned char*)"press Up to skip");
+      disp = 1;
+    }
+  }
 }
 
 // int map::genepoints(vector3_t *pv){

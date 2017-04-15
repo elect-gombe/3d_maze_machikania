@@ -89,11 +89,11 @@ public:
 };
 
 inline static
-void fpover(int x,int y,unsigned int c){
-  unsigned short *ad;
+void fpover(int x,int y){
+  unsigned short *ad,d1;
   ad=VRAM+y*H_WORD+x/4;
-  c<<=(3-(x%4))*4;
-  *ad|=c;
+  d1=~(0xf000>>(x%4)*4);
+  *ad&=d1;
 }
 
 inline static

@@ -135,7 +135,7 @@ int main_3d(void){
   clearscreen();
 
   projection=translation(vector3(32768,32768,0));
-  projection=loadPerspective(15000,65536*window_height/window_width,65536/2,65536*30,0,0)*projection;
+  projection=loadPerspective(15000,65536*window_height/window_width,65536/2,65536*40,0,0)*projection;
 
   vector3 viewdir;
   vector3 vlookat;
@@ -167,7 +167,7 @@ int main_3d(void){
       if(abs(vlookat.x-pointvec[j].x)+abs(vlookat.z-pointvec[j].z)<65536*15){
 	poly_transed[j] = m.applyit(vector3(pointvec[j]));
       }else{
-	poly_transed[j].z = -1;
+	poly_transed[j].z = 0x7FFFFFFF;
       }
       //      std::cout<<"poly"<<pointvec[j].x/65536.<<","<<pointvec[j].y/65536.<<","<<pointvec[j].z/65536.<<std::endl;
     }
@@ -177,9 +177,13 @@ int main_3d(void){
  	vo[j] = pointvec[polyvec[i][j]];
       }
 
-      if(v[0].z &0x00FF0000)continue;
-      if(v[1].z &0x00FF0000)continue;
-      if(v[2].z &0x00FF0000)continue;
+      if(v[0].z >65536||v[0].z < -65536*64)continue;
+      if(v[1].z >65536||v[1].z < -65536*64)continue;
+      if(v[2].z >65536||v[2].z < -65536*64)continue;
+
+      // if(v[0].z &0x00FF0000)continue;
+      // if(v[1].z &0x00FF0000)continue;
+      // if(v[2].z &0x00FF0000)continue;
 
       //      if(v[0].z < 0) break;
       if(!(
@@ -234,7 +238,7 @@ int main_3d(void){
     
     for(int y=0;y<window_height;y++){
       for(int i=0;i<window_width;i++){
-	zlinebuf[i]=65536*250;
+	zlinebuf[i]=65536*63;
       }
       for(int i=0;i<tnum;i++){
 	if(t[draworder[i]].ymin <= y&&t[draworder[i]].ymax > y){
@@ -242,7 +246,7 @@ int main_3d(void){
 	}
       }
       for(int i=0;i<window_width;i++){
-	if(zlinebuf[i]==65536*250){
+	if(zlinebuf[i]==65536*63){
 	  fpover(i,y);
 	}
       }

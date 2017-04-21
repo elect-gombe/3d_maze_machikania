@@ -46,15 +46,13 @@ int triangle::draw(int *zlinebuf,graphiclib &g){
 
   {
     int c=sx+yno+ymin+frame;
-    unsigned short *gr;
     int i;
-    gr = VRAM+(yno+ymin)*64+sx/4;
     for(i=sx;i<ex;i++){
       zv += deltaz;
-      smoke = min(16777216-zv,16777216/4);
-      if(zv < zlinebuf[i]){
+      smoke = min(4194304-zv,4194304/4);
+      if(zv>0&&(unsigned)zv < (unsigned)zlinebuf[i]){
 	//g.setbrush();
-	fpset(i,yno+ymin,(col*smoke/65536/64+(c&1))/2);
+	fpset(i,yno+ymin,(col*smoke/65536/16+(c&1))/2);
 	zlinebuf[i] = zv;
       }
       c++;
@@ -231,19 +229,19 @@ int triangle::triangle_set(vector3 px[3],color_t col){
   int zdelta_top_btm;
   int zdelta_mid_btm;
   if(p[2].y!=p[1].y){
-    zdelta_top_mid = int64_t(256)*(p[1].z-p[2].z)/(p[1].y-p[2].y);
+    zdelta_top_mid = int64_t(64)*(p[1].z-p[2].z)/(p[1].y-p[2].y);
   }else{
     zdelta_top_mid = 0;
   }
 
   if(p[1].y!=p[0].y){
-    zdelta_mid_btm = int64_t(256)*(p[1].z-p[0].z)/(p[1].y-p[0].y);
+    zdelta_mid_btm = int64_t(64)*(p[1].z-p[0].z)/(p[1].y-p[0].y);
   }else{
     zdelta_mid_btm = 0;
   }
 
   if(p[2].y!=p[0].y){
-    zdelta_top_btm = int64_t(256)*(p[2].z-p[0].z)/(p[2].y-p[0].y);
+    zdelta_top_btm = int64_t(64)*(p[2].z-p[0].z)/(p[2].y-p[0].y);
   }else{
     zdelta_top_btm = 0;
   }
@@ -262,8 +260,8 @@ int triangle::triangle_set(vector3 px[3],color_t col){
   if(p[1].x*65536 >= split_x){
     pdx[0] = top_mid_x*65536;
     pdx[1] = top_btm_x*65536;
-    pdz[0] = top_mid_z*256;
-    pdz[1] = top_btm_z*256;
+    pdz[0] = top_mid_z*64;
+    pdz[1] = top_btm_z*64;
     delta[1][0]=delta_top_mid;
     delta[1][1]=delta_top_btm;
     delta[0][0]=delta_mid_btm;
@@ -276,8 +274,8 @@ int triangle::triangle_set(vector3 px[3],color_t col){
   }else{
     pdx[0] = top_btm_x*65536;
     pdx[1] = top_mid_x*65536;
-    pdz[0] = top_btm_z*256;
-    pdz[1] = top_mid_z*256;
+    pdz[0] = top_btm_z*64;
+    pdz[1] = top_mid_z*64;
     delta[1][0]=delta_top_btm;
     delta[1][1]=delta_top_mid;
     delta[0][0]=delta_top_btm;

@@ -15,6 +15,33 @@
 int main_3d(void);
 void hint(graphiclib& g,map &m,const vector3& lookat,vector2 &np);
 
+const int hit_margin = 65536/8;
+
+void wall_hit(vector3 &lookat,map &m){
+  vector2 at;
+  vector2 atd;
+  
+  at = m.calcpos(lookat,1);
+  at.print();
+  atd = at + vector2(-1,0);
+  if(m.isinmap(atd)&&m.map[atd.y][atd.x]==WALL&&(lookat.z-at.x*size_grid)+size_grid/4 < hit_margin){
+    lookat.z = at.x*size_grid + hit_margin-size_grid/4;
+  }
+  atd = at + vector2(1,0);
+  if(m.isinmap(atd)&&m.map[atd.y][atd.x]==WALL&&(at.x*size_grid-lookat.z)+size_grid/4 < hit_margin){
+    lookat.z = at.x*size_grid - hit_margin+size_grid/4;
+  }
+  atd = at + vector2(0,-1);
+  if(m.isinmap(atd)&&m.map[atd.y][atd.x]==WALL&&(lookat.x-at.y*size_grid)+size_grid/4 < hit_margin){
+    lookat.x = at.y*size_grid + hit_margin-size_grid/4;
+  }
+  atd = at + vector2(0,1);
+  if(m.isinmap(atd)&&m.map[atd.y][atd.x]==WALL&&(at.y*size_grid-lookat.x)+size_grid/4 < hit_margin){
+    lookat.x = at.y*size_grid - hit_margin+size_grid/4;
+  }
+  atd = at - vector2(-1,0);
+}
+
 
 using namespace video;
 
@@ -142,8 +169,9 @@ int main_3d(void){
   vector2 mouse;
   vector2 np;
   
-  vlookat = vector3(0,35000,0);
+  vlookat = vector3(size_grid,35000,size_grid);
   while(1){
+    wall_hit(vlookat,gmap);
     pointnum=gmap.genepoints(pointvec,vlookat);
     polynum=gmap.genepoly(polyvec,vlookat);
     viewdir = vector3(cos(np.x/1000.)*cos(np.y/1000.)*65536,sin(np.y/1000.)*65536,sin(np.x/1000.)*cos(np.y/1000.)*65536);

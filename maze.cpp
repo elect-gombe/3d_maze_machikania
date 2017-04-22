@@ -58,11 +58,6 @@ unsigned long myRand(int seed=0){
     t=(x^(x<<11));x=y;y=z;z=w; return( w=(w^(w>>19))^(t^(t>>8)) ); 
 } 
 
-enum mape{
-  WAY=0x0,
-  WALL=0x1,
-};
-
 void map::printmap(graphiclib& g){
   vector2 p;
   vector2 sp;
@@ -258,8 +253,8 @@ void map::mazemake(int seed,const vector2& sm,graphiclib& g){
 vector2 map::calcpos(const vector3& lookat,int n){
   vector2 pos;
 
-  pos.x = +lookat.z*n/size_grid+size.x*n/2;
-  pos.y = lookat.x*n/size_grid+size.y*n/2;
+  pos.x = (lookat.z+size_grid/2)*n/size_grid;
+  pos.y = (lookat.x+size_grid/2)*n/size_grid;
 
   return pos;
 }
@@ -274,13 +269,13 @@ int map::genepoints(vector3_t *pv,const vector3& lookat){
   s.y -= drawarea;
   for(int x=0;x<drawarea*2;x++){
     for(int y=0;y<drawarea*2;y++){
-      pv[i].x   =  (x-(size.x+1)/2+s.y)*size_grid;
+      pv[i].x   =  (x+s.y)*size_grid;
       pv[i].y   = -size_height/2;
-      pv[i++].z =  (y-size.y/2+s.x)*size_grid;
+      pv[i++].z =  (y+s.x)*size_grid;
       //printf("%d,%d,%d\n",pv[i].x,pv[i].y,pv[i].z);
-      pv[i].x   =  (x-(size.x+1)/2+s.y)*size_grid;
+      pv[i].x   =  (x+s.y)*size_grid;
       pv[i].y   =  size_height/2;
-      pv[i++].z =  (y-size.y/2+s.x)*size_grid;
+      pv[i++].z =  (y+s.x)*size_grid;
     }
   }
 

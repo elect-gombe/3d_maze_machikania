@@ -18,13 +18,15 @@ struct vector2_t{
   int16_t y;
 };
 
+enum mape{
+  WAY=0x0,
+  WALL=0x1,
+};
+
 class map{
 private:
   vector2 size;
 
-  int isinmap(const vector2 &p){
-    return p.x>=0&&p.y>=0&&p.x<size.x&&p.y<size.y;
-  }
   uint8_t* loadmap(const vector2& p){
     assert(isinmap(p));
     return &map[p.y][p.x];
@@ -36,6 +38,9 @@ private:
   void keytask();
 public:
   uint8_t map[MAX_Y][MAX_X];
+  int isinmap(const vector2 &p){
+    return p.x>=0&&p.y>=0&&p.x<size.x&&p.y<size.y;
+  }
   int genepoly(int polyvec[][3],const vector3& lookat);
   int genepoints(vector3_t *pv,const vector3& lookat);
 
